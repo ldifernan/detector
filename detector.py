@@ -12,10 +12,9 @@ mail_from = "xxxx@xxx.com"
 mail_to = "yyyy@yyy.com"
 mail_subject = "Presence detected"
 led.off()
-while True:
-    pir.wait_for_motion()
-    print("Motion Detected!")
-    led.on()
+
+
+def send_mail():
     s = smtplib.SMTP(host=smtp_host, port=smtp_port)
     s.starttls()
     s.login(mail, password)
@@ -28,5 +27,12 @@ while True:
     print("email sent")
     del msg
     s.quit()
+
+
+while True:
+    pir.wait_for_motion()
+    print("Motion Detected!")
+    send_mail()
+    led.on()
     pir.wait_for_no_motion()
     led.off()
