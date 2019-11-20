@@ -1,7 +1,5 @@
 from gpiozero import MotionSensor, LED
 from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-import time
 import smtplib
 
 pir = MotionSensor(4)
@@ -20,12 +18,12 @@ while True:
     led.on()
     s = smtplib.SMTP(host=smtp_host, port=smtp_port)
     s.starttls()
-    s.login(mail,password)
+    s.login(mail, password)
     print("login succesful")
     msg = MIMEMultipart()
-    msg['From']=mail_from
-    msg['To']=mail_to
-    msg['Subject']=mail_subject
+    msg['From'] = mail_from
+    msg['To'] = mail_to
+    msg['Subject'] = mail_subject
     s.send_message(msg)
     print("email sent")
     del msg
